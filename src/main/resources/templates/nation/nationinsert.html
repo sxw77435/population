@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>nation insert</title>
+</head>
+<style>
+    body{
+        background-image: url('../image/insert.png');
+    }
+    h1{
+        text-align: center;
+    }
+
+    .name{
+        margin-bottom: 10px;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    #name{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name1{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name2{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name3{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name4{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name5{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    #name6{
+        width: 70%;
+        height: 15px;
+        border-radius:30px ;
+        margin-bottom: 40px;
+        padding:20px;
+        font-size:18px;
+    }
+    .btn-primary {
+        width: 40%;
+        height: 50px;
+        margin-top: 40px;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #131a1f;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: rgb(197, 73, 73);
+    }
+
+
+    .btn-danger{
+        width: 40%;
+        height: 50px;
+        margin-top: 40px;
+        margin-left: 100px;
+        margin-bottom: 50px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #131a1f;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .btn-danger:hover {
+        background-color: rgb(197, 73, 73);
+    }
+
+
+
+</style>
+<body>
+    <h1>INSERT COUNTRY HERE</h1>
+    <form action="/nation/nationinsert" method="post" th:align="center" enctype="multipart/form-data">
+        <label class="img-area" id="ImgArea">
+            <ul class="word" >INSERT YOUR  NATION PICTURE</ul>
+            <img id="Img" width="190" height="150"onclick="openFileUpload()" >
+        </label>
+        <div class="thumbnail-file-area">
+            <input type="file" id="thumbnailImg" name="image" onchange="loadImg(this,1)">
+        </div>
+        <label class ="nationname">
+            <ul class="name">NATION NAME*</ul>
+
+            <input type="text" id="name" class="form-control" name="nationname" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR NATION NAME"required>
+        </label>
+        <label class ="year2020">
+            <ul class="name">YEAR 2020*</ul>
+
+            <input type="text" id="name1" class="form-control" name="year2020" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <label class ="year2021">
+            <ul class="name">YEAR 2021*</ul>
+
+            <input type="text" id="name2" class="form-control" name="year2021" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <label class ="year2022">
+            <ul class="name">YEAR 2022*</ul>
+
+            <input type="text" id="name3" class="form-control" name="year2022" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <label class ="year2023">
+            <ul class="name">YEAR 2023*</ul>
+
+            <input type="text" id="name4" class="form-control" name="year2023" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <label class ="year2024">
+            <ul class="name">YEAR 2024*</ul>
+
+            <input type="text" id="name5" class="form-control" name="year2024" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <label class ="year2025">
+            <ul class="name">YEAR 2025*</ul>
+
+            <input type="text" id="name6" class="form-control" name="year2025" placeholder="&nbsp;&nbsp;&nbsp;PLEASE ENTER YOUR DATA"required>
+        </label>
+        <button type="submit" class="btn btn-primary">INSERT!!!</button>
+        <button type="reset" class="btn btn-danger">RESET</button>
+
+    </form>
+    <script>
+        function openFileUpload() {
+            document.getElementById('thumbnailImg').click();
+        }
+        function loadImg(value) {
+            if (value.files && value.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("Img").src = e.target.result;
+                }
+                reader.readAsDataURL(value.files[0]);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

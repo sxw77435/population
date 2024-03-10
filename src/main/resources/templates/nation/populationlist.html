@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras-springsecurity5">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>nationlist</title>
+</head>
+<style>
+    body, html {
+        background-image: url('../image/list.png');
+        height: 100%;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .country-list {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        list-style: none;
+        justify-content: space-between;
+    }
+
+    .country {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width:60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .country-flag {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .country-name {
+        font-size: 1.5em;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    .country-population {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    .country-no{
+        display: none;
+    }
+    button{
+        width: 300px;
+        padding:10px 20px;
+        border-radius: 30px;
+        background-color: white;
+        transition: background-color 0.5s, color 0.5s;
+        margin-left: 50px;
+    }
+
+    button:hover {
+        background-color: #d3c58d; /* 鼠标悬停时的背景颜色 */
+    }
+    h1{
+        margin-left: 20px;
+        margin-top: 70px;
+    }
+
+</style>
+<body>
+
+<h1 class="title">COUNTRIES</h1>
+
+
+<div class="container">
+    <ul class="country-list" th:each="population : ${populationList}">
+        <!-- 将国家编号存储在 data-nationno 属性中 -->
+        <li class="country" data-nationno="${population.nationno}">
+            <!-- 其他国家信息 -->
+            <h2 th:text="${population.nationno}" class="country-no" style="display: none;"></h2>
+            <img th:src="@{/image/{imageFileName}(imageFileName=${population.image})}" alt="국기" class="country-flag">
+            <h2 th:text="${population.nationname}" class="country-name"></h2>
+            <p th:text="${population.year2024}" class="country-population"></p>
+        </li>
+    </ul>
+    <th:block sec:authorize="hasRole('ADMIN')">
+        <button onclick="location.href='/nation/nationinsert'">INSERT</button>
+    </th:block>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".country").click(function(){
+            // 获取国家编号（从 data-nationno 属性中获取）
+            var nationNo = $(this).find('h2').eq(0).text();
+            // 构建国家详细页面的URL，并将国家编号作为查询参数传递
+            var detailPageURL = "/nation/nationdetail/" + nationNo;
+            // 导航到详细页面
+            window.location.href = detailPageURL;
+        });
+    });
+</script>
+
+
+</body>
+</html>

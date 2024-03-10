@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Detail</title>
+</head>
+<style>
+
+    body {
+        background-image: url('/image/people.png');
+        font-family: Arial, sans-serif;
+    }
+
+    /* Styles for the container */
+
+
+    /* Styling for the country list */
+    .country-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .country {
+        margin: auto;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Country name and number styles */
+    .country-name, .country-no {
+        margin-left: 570px;
+
+    }
+
+    /* Hide the country number as per your HTML */
+    .country-no {
+        display: none;
+    }
+
+    /* Flag image styles */
+    .country-flag {
+        max-width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    th {
+        background-color: #f8f8f8;
+    }
+    button{
+        width: 20%;
+        height: 50px;
+        margin-top: 40px;
+        margin-left: 250px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #131a1f;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: rgb(197, 73, 73);
+    }
+    img{
+        margin-left: 550px;
+    }
+
+
+
+</style>
+<body>
+
+
+    <div class="country-list" th:each="population : ${populationDto}">
+        <!-- 将国家编号存储在 data-nationno 属性中 -->
+        <div class="country" data-nationno="${population.nationno}">
+            <!-- 其他国家信息 -->
+            <p th:text="${population.nationno}" class="country-no"></p>
+
+
+            <img th:src="@{/image/{imageFileName}(imageFileName=${population.image})}" alt="국기" class="country-flag">
+            <h2 th:text="${population.nationname}" class="country-name"></h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Population</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2020</td>
+                    <td th:text="${population.year2020}"></td>
+                </tr>
+                <tr>
+                    <td>2021</td>
+                    <td th:text="${population.year2021}"></td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td th:text="${population.year2022}"></td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td th:text="${population.year2023}"></td>
+                </tr>
+                <tr>
+                    <td>2024</td>
+                    <td th:text="${population.year2024}"></td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td th:text="${population.year2025}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 使用按钮触发不同操作 -->
+            <th:block sec:authorize="hasRole('ADMIN')">
+            <div class="buttons" >
+                <button type="button" onclick="updatePopulation()">Update</button>
+                <button type="button" onclick="deletePopulation()">Delete</button>
+            </div>
+            </th:block>
+        </div>
+    </div>
+
+
+<script>
+    // JavaScript function to handle update action
+    function updatePopulation() {
+        var nationnoElement = document.querySelector('.country-no');
+        var nationno = nationnoElement.textContent;
+
+        var updateUrl = `/nation/nationupdateform/${nationno}`; // 更新的URL
+
+        // 跳转到更新页面
+        window.location.href = updateUrl;
+    }
+
+    // JavaScript function to handle delete action
+    function deletePopulation() {
+        // 获取国家编号
+        var nationnoElement = document.querySelector('.country-no');
+        var nationno = nationnoElement.textContent;
+
+        // 发送DELETE请求
+        fetch(`/nation/nationdelete/${nationno}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    // 删除成功，执行页面跳转到populationlist
+                    window.location.href = '/nation/populationlist';
+                } else {
+                    // 处理删除失败的情况
+                    console.error('Failed to delete population');
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+    }
+</script>
+</body>
+</html>

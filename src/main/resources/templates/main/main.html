@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Population Dashboard</title>
+
+</head>
+<style>
+    body {
+        background-size: cover;
+        background-image: url('/image/background.png');
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        color: #333;
+    }
+
+    header, footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 1em 0;
+    }
+
+    main {
+        padding: 2em;
+        text-align: center;
+    }
+
+
+
+    #country-stats h2 {
+        margin-top: 2em;
+    }
+    #more{
+        margin-top: 350px;
+        margin-right: 100px
+    }
+    button{
+        width: 300px;
+        padding:10px 20px;
+        border-radius: 30px;
+        background-color: white;
+        transition: background-color 0.5s, color 0.5s;
+        margin-left: 450px;
+        margin-top: 50px;
+        margin-right: 550px;
+    }
+
+    button:hover {
+        background-color:#E6E6FA; /* 鼠标悬停时的背景颜色 */
+    }
+    .list{
+        margin-top: 20px;
+    }
+    .welcome{
+        margin-right: 100px;
+    }
+
+</style>
+<body>
+
+<main>
+
+    <div id = "more">
+        <h1>SEE MORE COUNTRIES?</h1>
+    </div>
+    <div align="center">
+    <th:block sec:authorize="isAnonymous()">
+        <button onclick="location.href='/login/loginpage'">로그인</button>
+    </th:block>
+
+    <th:block sec:authorize="isAuthenticated()">
+        <h3 align="center" class="welcome"><span sec:authentication="name"></span>환영합니다</h3>
+        <button onclick="location.href='/nation/populationlist'">인구리스트</button>
+        <br>
+        <button class="list" onclick="location.href='/logout/logoutpage'">로그아웃</button>
+
+    </th:block>
+
+
+    </div>
+
+
+
+</main>
+
+</body>
+</html>

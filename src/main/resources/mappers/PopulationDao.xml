@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uni.population.nationpopulation.model.dao.PopulationDao"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+
+    <resultMap type="com.uni.population.nationpopulation.model.dto.PopulationDto" id="populationResultMap">
+        <id property="nationno" column="NATION_NO"/>
+        <result property="nationname" column="NATION_NAME"/>
+        <result property="year2020" column="YEAR_2020"/>
+        <result property="year2021" column="YEAR_2021"/>
+        <result property="year2022" column="YEAR_2022"/>
+        <result property="year2023" column="YEAR_2023"/>
+        <result property="year2024" column="YEAR_2024"/>
+        <result property="year2025" column="YEAR_2025"/>
+        <result property="image" column="IMAGE"/>
+    </resultMap>
+
+
+    <select id="findAllNation" resultMap="populationResultMap"><!-- 메소드명하고 동일하게-->
+        SELECT
+            NATION_NO
+            ,NATION_NAME
+             ,YEAR_2020
+             ,YEAR_2021
+             ,YEAR_2022
+             ,YEAR_2023
+             ,YEAR_2024
+             ,YEAR_2025
+             ,IMAGE
+        FROM TBL_POPULATION
+    </select>
+    <select id="findNationByCode" resultMap="populationResultMap"><!-- 메소드명하고 동일하게-->
+        SELECT
+             NATION_NO
+              ,NATION_NAME
+              ,YEAR_2020
+              ,YEAR_2021
+             , YEAR_2022
+             ,YEAR_2023
+             ,YEAR_2024
+             ,YEAR_2025
+             ,IMAGE
+        FROM TBL_POPULATION
+        WHERE NATION_NO = #{nationno}
+    </select>
+
+    <update id="updatePopulation" parameterType="com.uni.population.nationpopulation.model.dto.PopulationDto">
+        UPDATE TBL_POPULATION
+        SET NATION_NAME=#{nationname},YEAR_2020=#{year2020},YEAR_2021=#{year2021},YEAR_2022=#{year2022},YEAR_2023=#{year2023}
+        ,YEAR_2024=#{year2024},YEAR_2025=#{year2025},IMAGE = #{image}
+        WHERE NATION_NO = #{nationno}
+
+    </update>
+
+    <delete id="deletePopulation" parameterType="com.uni.population.nationpopulation.model.dto.PopulationDto">
+        DELETE FROM TBL_POPULATION
+        WHERE NATION_NO=#{nationno}
+    </delete>
+
+
+
+    <insert id ="registNation" parameterType="com.uni.population.nationpopulation.model.dto.PopulationDto">
+        INSERT
+        INTO TBL_POPULATION
+            (
+              NATION_NO
+             ,NATION_NAME
+             ,YEAR_2020
+             ,YEAR_2021
+             ,YEAR_2022
+             ,YEAR_2023
+             ,YEAR_2024
+             ,YEAR_2025
+             ,IMAGE
+        )
+        VALUES
+            (
+            SEQ_NATION_NO.NEXTVAL
+                , #{nationname}
+                , #{year2020}
+                , #{year2021}
+                , #{year2022}
+                , #{year2023}
+                , #{year2024}
+                , #{year2025}
+                ,#{image}
+            )
+
+
+    </insert>
+
+</mapper>
