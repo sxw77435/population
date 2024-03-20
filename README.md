@@ -12,6 +12,7 @@
 </ul>
 <br>
 
+### 간단한 사진보기
 ![image](https://github.com/sxw77435/population/assets/149069669/94caeb54-67df-40f5-85d6-3813a8bc6554)
 ![image](https://github.com/sxw77435/population/assets/149069669/cd1d49e3-47ac-49d8-932b-dfbbe84674ad)
 <br>
