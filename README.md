@@ -11,3 +11,9 @@
   <li>HTML5, CSS3, jQuery, JavaScript</li>
 </ul>
 <br>
+
+![image](https://github.com/sxw77435/population/assets/149069669/94caeb54-67df-40f5-85d6-3813a8bc6554)
+![image](https://github.com/sxw77435/population/assets/149069669/cd1d49e3-47ac-49d8-932b-dfbbe84674ad)
+<br>
+![image](https://github.com/sxw77435/population/assets/149069669/6aba57d6-a2f2-4628-ba0d-a677cf259d49)
+![image](https://github.com/sxw77435/population/assets/149069669/4b8a4ed6-da76-417c-a2b0-2235be5017a3)
